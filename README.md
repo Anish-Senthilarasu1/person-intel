@@ -1,8 +1,10 @@
 # Person Intel
+<img width="992" height="440" alt="image" src="https://github.com/user-attachments/assets/0667c448-5f20-4dbd-b1bb-7c2701065423" />
 
 `Person Intel` is a terminal-first research engine for understanding how a person operates from their public traces.
 
 The current version is intentionally not a glossy AI profile generator. It collects public data, preserves provenance, and exports a clean markdown corpus plus an Obsidian-ready vault so you can inspect the evidence before layering inference on top.
+![Uploading image.png…]()
 
 ## What It Does
 
