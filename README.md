@@ -47,13 +47,13 @@ The default mode reflects that philosophy. It stores the raw corpus first, so be
 
 ## Repository Status
 
-This repo has pivoted toward:
+This repo is now explicitly focused on:
 
 - terminal UI over web UI
 - raw data fidelity over polished summaries
 - inspectable knowledge artifacts over black-box synthesis
 
-The older frontend and API code are still present as legacy prototype surfaces, but the active direction is the TUI + markdown + knowledge-pack pipeline.
+There is no frontend in the active product surface. The project is TUI + markdown + knowledge-pack pipeline.
 
 ## Quick Start
 
