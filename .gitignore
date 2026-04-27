@@ -1,0 +1,25 @@
+.env
+outputs/
+data/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.DS_Store
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.idea/
+.vscode/
+
+# Legacy frontend build artifacts
+frontend/node_modules/
+frontend/.next/
+frontend/tsconfig.tsbuildinfo
+
+# Python build artifacts
+build/

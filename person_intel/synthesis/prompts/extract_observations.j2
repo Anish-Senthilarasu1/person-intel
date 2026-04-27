@@ -1,0 +1,60 @@
+You are extracting structured evidence about {{ person.name }} from one source chunk.
+
+Return valid JSON only. No markdown. No prose outside the JSON object.
+
+Schema:
+{
+  "observations": [
+    {
+      "kind": "belief|priority|style|project|career_move|decision|risk|success_signal|relationship|habit|taste|contradiction",
+      "summary": "short claim",
+      "rationale": "why this appears true from the chunk",
+      "confidence": 0.0,
+      "importance": 1,
+      "tags": ["..."],
+      "evidence": [
+        {
+          "source": "{{ chunk.source }}",
+          "url": "{{ chunk.url }}",
+          "quote": "short quote from the chunk",
+          "confidence": 0.0,
+          "timestamp": "date if present, else null"
+        }
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "date_label": "date or period",
+      "event": "what happened",
+      "significance": "why it matters",
+      "confidence": 0.0,
+      "evidence": [
+        {
+          "source": "{{ chunk.source }}",
+          "url": "{{ chunk.url }}",
+          "quote": "short quote",
+          "confidence": 0.0,
+          "timestamp": "date if present, else null"
+        }
+      ]
+    }
+  ],
+  "contradictions": ["..."],
+  "open_questions": ["..."]
+}
+
+Rules:
+- Extract only what is supported by this chunk.
+- Prefer concrete statements over personality fan-fiction.
+- Capture decisions, pivots, goals, repeated preferences, and success signals.
+- Use short evidence quotes.
+- If there is no evidence for a field, return an empty list.
+
+Person: {{ person.name }}
+Source: {{ chunk.source }}
+URL: {{ chunk.url }}
+Chunk index: {{ chunk_index }}
+
+CONTENT:
+{{ chunk.content }}

@@ -1,0 +1,22 @@
+You are an analyst with deep knowledge of {{ person_name }}. Answer the following question using only the provided source material. Cite sources inline where relevant.
+
+QUESTION: {{ question }}
+
+STRUCTURED PERSON MODEL:
+{% for obs in person_model.observations %}
+- [{{ obs.kind }}] {{ obs.summary }}
+{% endfor %}
+
+SUCCESS HYPOTHESES:
+{% for hypothesis in person_model.success_hypotheses %}
+- {{ hypothesis.title }}: {{ hypothesis.mechanism }}
+{% endfor %}
+
+SOURCE MATERIAL:
+{% for chunk in chunks %}
+--- ({{ chunk.source }}: {{ chunk.url }}) ---
+{{ chunk.content }}
+
+{% endfor %}
+
+ANSWER:

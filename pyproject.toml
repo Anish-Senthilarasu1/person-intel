@@ -1,0 +1,39 @@
+[project]
+name = "person-intel"
+version = "0.1.0"
+description = "Terminal-first person research engine that exports markdown dossiers and Obsidian-ready knowledge packs."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "groq>=0.11.0",
+    "twscrape>=0.17.0",
+    "playwright>=1.58.0",
+    "trafilatura>=2.0.0",
+    "beautifulsoup4>=4.14.0",
+    "PyGithub>=2.9.0",
+    "duckduckgo-search>=8.1.0",
+    "chromadb>=1.5.0",
+    "tiktoken>=0.12.0",
+    "diskcache>=5.6.0",
+    "tenacity>=9.0.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "jinja2>=3.1.0",
+    "typer>=0.12.0",
+    "rich>=13.0.0",
+    "httpx>=0.28.0",
+    "loguru>=0.7.0",
+    "streamlit>=1.35.0",
+    "fake-useragent>=1.4.0",
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.30.0",
+    "twikit>=2.3.0",
+]
+
+[project.scripts]
+person-intel = "person_intel.cli:app"
+person-intel-tui = "person_intel.tui:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

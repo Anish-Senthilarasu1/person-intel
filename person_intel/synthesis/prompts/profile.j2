@@ -1,0 +1,130 @@
+You are building a high-signal person model for {{ person.name }}.
+
+Your job is not to write a generic biography. Your job is to explain:
+- how this person operates
+- what they repeatedly optimize for
+- what decisions and patterns seem to explain their rise
+- what is supported by evidence vs what is still an inference
+
+IMPORTANT:
+- Reproduce the _Generated_, _X/Twitter_, and _Company/Org_ metadata lines exactly as shown.
+- Use direct evidence wherever possible.
+- Mark inferences clearly.
+- If evidence is thin, say so plainly.
+- Do not present speculation as fact.
+
+OUTPUT FORMAT — use exactly these headers:
+
+# {{ person.name }} — Person Model
+_Generated: {{ generated_at }}_
+{% if person.twitter_handle %}_X/Twitter: [@{{ person.twitter_handle }}](https://x.com/{{ person.twitter_handle }})_{% endif %}
+{% if person.company %}_Company/Org: {{ person.company }}_{% endif %}
+
+## Executive Summary
+Write a concise synthesis of who this person appears to be, what domain they operate in, and what seems to matter most to them.
+
+## Operating Model
+Explain how they appear to think, decide, communicate, and allocate effort. Separate direct evidence from inference when needed.
+
+## What They Repeatedly Optimize For
+Describe recurring priorities, taste, constraints, incentives, and standards. Use quotes and concrete examples.
+
+## How They Rose
+Explain the most plausible mechanisms behind this person’s success. Focus on leverage, compounding behaviors, distribution, craft, network, speed, product sense, writing, hiring, reputation, capital, or unusual choices. Tie each mechanism to evidence.
+
+## Career Inflection Points
+Describe the key moves, pivots, and directional changes that appear to matter most.
+
+## Repeated Patterns
+List recurring patterns in behavior, output, interests, and strategic choices.
+
+## Contradictions And Tensions
+Call out any meaningful contradictions, tensions, or ambiguous evidence.
+
+## Evidence-Backed Hypotheses
+Present the strongest hypotheses about how this person operates and succeeds. Label each with confidence language.
+
+## Timeline
+| Date | Event | Why It Matters |
+|------|-------|----------------|
+Use available dates or approximate periods if exact dates are missing.
+
+## Notable Quotes
+Include 5-10 quotes that reveal how they think or what they optimize for. Include source links.
+
+## Source Quality Notes
+Briefly explain the source coverage: what is strong, what is weak, and what missing data could change the conclusions.
+
+## Sources
+Numbered list of URLs referenced above.
+
+STRUCTURED PERSON MODEL:
+
+Observations:
+{% for obs in person_model.observations %}
+- [{{ obs.kind }} | importance {{ obs.importance }}/5 | confidence {{ "%.2f"|format(obs.confidence) }}] {{ obs.summary }}
+{% if obs.rationale %}  rationale: {{ obs.rationale }}
+{% endif %}{% if obs.tags %}  tags: {{ obs.tags | join(", ") }}
+{% endif %}{% for ev in obs.evidence %}  evidence: {{ ev.source }} | {{ ev.url }}{% if ev.timestamp %} | {{ ev.timestamp }}{% endif %}{% if ev.quote %} | "{{ ev.quote }}"{% endif %}
+{% endfor %}
+{% endfor %}
+
+Success hypotheses:
+{% for hypothesis in person_model.success_hypotheses %}
+- {{ hypothesis.title }} (confidence {{ "%.2f"|format(hypothesis.confidence) }}): {{ hypothesis.mechanism }}
+{% for ev in hypothesis.evidence %}  evidence: {{ ev.source }} | {{ ev.url }}{% if ev.quote %} | "{{ ev.quote }}"{% endif %}
+{% endfor %}
+{% endfor %}
+
+Timeline events:
+{% for event in person_model.timeline %}
+- {{ event.date_label }} | {{ event.event }}{% if event.significance %} | {{ event.significance }}{% endif %}
+{% endfor %}
+
+Contradictions:
+{% for contradiction in person_model.contradictions %}
+- {{ contradiction }}
+{% endfor %}
+
+Open questions:
+{% for question in person_model.open_questions %}
+- {{ question }}
+{% endfor %}
+
+---
+{% if twitter_content %}
+
+## SOURCE: X / Twitter
+{% for chunk in twitter_content %}
+### Tweets (batch {{ loop.index }})
+{{ chunk.content }}
+
+{% endfor %}
+{% endif %}
+{% if web_content %}
+
+## SOURCE: Web
+{% for chunk in web_content %}
+### {{ chunk.url }}
+{{ chunk.content }}
+
+{% endfor %}
+{% endif %}
+{% if github_content %}
+
+## SOURCE: GitHub
+{% for chunk in github_content %}
+### {{ chunk.metadata.get('type', 'content') | title }} — {{ chunk.url }}
+{{ chunk.content }}
+
+{% endfor %}
+{% endif %}
+{% if linkedin_content %}
+
+## SOURCE: LinkedIn
+{% for chunk in linkedin_content %}
+### Posts (batch {{ loop.index }})
+{{ chunk.content }}
+
+{% endfor %}
+{% endif %}
