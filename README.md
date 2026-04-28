@@ -95,8 +95,8 @@ person-intel-tui
 ### 4. Run The Raw CLI Path
 
 ```bash
-python3 -m person_intel.cli profile "Rishi Kanaparti" \
-  --twitter 0x_rxkvys \
+python3 -m person_intel.cli profile "Paul Graham" \
+  --twitter paulg \
   --sources twitter,web \
   --max-tweets 100 \
   --max-pages 20
